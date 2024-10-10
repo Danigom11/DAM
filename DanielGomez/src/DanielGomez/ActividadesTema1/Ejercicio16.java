@@ -18,37 +18,45 @@ public class Ejercicio16 {
 		 */
 		int dia, mes, agno;
 		Scanner sc = new Scanner(System.in);
-		boolean diaValido, mesValido, agnoValido, fechaValida;
+		boolean diaValido, mesValido, agnoValido, fechaValida, meses31Dias, meses30Dias;
 		String mensaje;
 		String fecha;
-
 		
-		System.out.println("Dime el día:");
+		System.out.print("Dime el día: ");
 		dia = sc.nextInt();
 		sc.nextLine();
-		System.out.println("Dime el mes:");
+		System.out.print("Dime el mes: ");
 		mes = sc.nextInt();
-		System.out.println("Dime el año:");
+		System.out.print("Dime el año: ");
 		agno = sc.nextInt();
 		
 		agnoValido = (agno >= 1900 && agno <= 9999) ? true : false;
 		boolean esBisiesto = ((agno % 4) == 0 ) && (((agno % 100) != 0) || ((agno % 400) == 0)) ? true : false;
 		
 		mesValido = (mes >=1 && mes <=12) ? true : false;
+		meses31Dias = mes == 1 || mes == 3 || mes == 5 || mes == 7 || mes == 8 || mes == 10 || mes == 12;
+		meses30Dias = mes == 4 || mes == 6 || mes == 9 || mes == 11;
 		
-		diaValido = mes == 1 && dia >=1 && dia <= 31 ? true :
-			mes == 2 && esBisiesto == true && dia >=1 && dia <= 29 ? true :
-				mes == 2 && esBisiesto == false && dia >=1 && dia <= 28 ? true :
-				mes == 3 && dia >=1 && dia <= 31 ? true :
-					mes == 4 && dia >=1 && dia <= 30 ? true :
-						mes == 5 && dia >=1 && dia <= 31 ? true :
-							mes == 6 && dia >=1 && dia <= 30 ? true :
-								mes == 7 && dia >=1 && dia <= 31 ? true :
-									mes == 8 && dia >=1 && dia <= 31 ? true :
-										mes == 9 && dia >=1 && dia <= 30 ? true :
-											mes == 10 && dia >=1 && dia <= 31 ? true :
-												mes == 11 && dia >=1 && dia <= 30 ? true :
-													mes == 12 && dia >=1 && dia <= 31 ? true : false;
+		diaValido = meses31Dias && dia >=1 && dia <= 31 ? true : 
+			meses30Dias && dia >=1 && dia <= 30 ? true :
+				mes == 2 && esBisiesto && dia >=1 && dia <= 29 ? true :
+					mes == 2 && !esBisiesto == false && dia >=1 && dia <= 28 ? true : false;
+			
+			
+			
+//		diaValido = mes == 1 && dia >=1 && dia <= 31 ? true :
+//			mes == 2 && esBisiesto == true && dia >=1 && dia <= 29 ? true :
+//				mes == 2 && esBisiesto == false && dia >=1 && dia <= 28 ? true :
+//				mes == 3 && dia >=1 && dia <= 31 ? true :
+//					mes == 4 && dia >=1 && dia <= 30 ? true :
+//						mes == 5 && dia >=1 && dia <= 31 ? true :
+//							mes == 6 && dia >=1 && dia <= 30 ? true :
+//								mes == 7 && dia >=1 && dia <= 31 ? true :
+//									mes == 8 && dia >=1 && dia <= 31 ? true :
+//										mes == 9 && dia >=1 && dia <= 30 ? true :
+//											mes == 10 && dia >=1 && dia <= 31 ? true :
+//												mes == 11 && dia >=1 && dia <= 30 ? true :
+//													mes == 12 && dia >=1 && dia <= 31 ? true : false;
 		
 		
 		fechaValida = agnoValido && mesValido && diaValido;

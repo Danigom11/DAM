@@ -31,8 +31,8 @@ public class Main13 {
 		notaMediaExpediente = (notasPrimerTri + notasSegundoTri + notasTercerTri) / 3.0;
 		System.out.println("Nota media: " + notaMediaBoletin);
 		System.out.printf("Nota media expediente: %,.2f", notaMediaExpediente);
-
-
+		
+		sc.close();
 	}
 
 }

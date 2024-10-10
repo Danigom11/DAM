@@ -19,5 +19,4 @@ public class Ejercicio18 {
 		resultado = hora + " hora, " + minutos + " minutos y " + segundos + " segundos.";
 		System.out.println(resultado);
 	}
-
 }

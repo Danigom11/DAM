@@ -24,7 +24,7 @@ es bisiesto si es divisible entre cuatro y (no es divisible entre 100 o es divis
 		 */
 		
 		int anio = 2005;
-		boolean esBisiesto = ((anio % 4) == 0 ) && (((anio % 100) != 0) || ((anio % 400) == 0)) ? true : false;
+		boolean esBisiesto = (anio % 4 == 0 ) && (!(anio % 100 == 0) || (anio % 400 == 0)) ? true : false;
 		System.out.println(esBisiesto);
 		
 	}

@@ -29,32 +29,33 @@ Matrícula de honor si == 10
 		
 		try {
 			
-			System.out.println("Nota 1: ");
+			System.out.print("Nota 1: ");
 			int nota1 = sc.nextInt();
 			nota1 = (nota1 > 10) || (nota1 < 0) ? 0 : nota1;
 			sc.nextLine();
 			
-			System.out.println("Nota 2: ");
+			System.out.print("Nota 2: ");
 			int nota2 = sc.nextInt();
-			nota2 = nota2 > 10 ? 0 : nota2;
+			nota2 = (nota2 > 10) || (nota2 < 0) ? 0 : nota2;
 			sc.nextLine();
 			
-			System.out.println("Nota 3: ");
+			System.out.print("Nota 3: ");
 			int nota3 = sc.nextInt();
-			nota3 = nota3 > 10 ? 0 : nota3;
+			nota3 = (nota3 > 10) || (nota3< 0) ? 0 : nota3;
 			sc.nextLine();
 			
-			System.out.println("Nota 4: ");
+			System.out.print("Nota 4: ");
 			int nota4 = sc.nextInt();
-			nota4 = nota4 > 10 ? 0 : nota4;
+			nota4 = (nota4 > 10) || (nota4 < 0) ? 0 : nota4;
 			sc.nextLine();
 			
-			double notaFinal = (nota1 * 0.3) + (nota2 * 0.25) + (nota3 * 0.15) + (nota4 * 0.3);
+			float notaFinal = (float)((nota1 * 0.3) + (nota2 * 0.25) + (nota3 * 0.15) + (nota4 * 0.3));
+			
 			String nota = notaFinal < 5 ? "Suspenso" :
-				notaFinal >= 5 && notaFinal <= 6 ? "Aprobado" :
+				notaFinal >= 5 && notaFinal < 6 ? "Aprobado" :
 					notaFinal >= 6 && notaFinal < 7 ? "Bien" :
 						notaFinal >= 7 && notaFinal < 9 ? "Notable" : 
-							notaFinal == 10 ? "Sobresaliente": "Matrícula de honor";
+							notaFinal >= 9 && notaFinal < 10 ? "Sobresaliente": "Matrícula de honor";
 					
 			System.out.printf("Nota final: %,.2f%n", notaFinal);
 			System.out.println(nota);
@@ -63,7 +64,7 @@ Matrícula de honor si == 10
 			System.out.println("ERROR DE PROCESO");
 		}
 		
-
+		sc.close();
 	}
 
 }
