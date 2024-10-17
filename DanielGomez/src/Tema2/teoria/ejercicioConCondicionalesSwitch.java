@@ -2,7 +2,7 @@ package Tema2.teoria;
 
 import java.util.Scanner;
 
-public class ejercicioConCondicionales {
+public class ejercicioConCondicionalesSwitch {
 
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
@@ -28,33 +28,42 @@ public class ejercicioConCondicionales {
 		System.out.print("Importe de la venta: ");
 		importeVenta = sc.nextDouble();
 
-		if (zonaVenta == 1) {
+		switch (zonaVenta) {
+		case 1:
 			zona = "CENTRO";
 			importeZona = 2000;
-		} else if (zonaVenta == 2) {
+			break;
+		case 2: 
 			zona = "SUR";
 			importeZona = 3400;
-		} else if (zonaVenta == 3) {
+			break;
+		case 3:
 			zona = "ESTE-OESTE";
 			importeZona = 2350;
-		} else if (zonaVenta == 4) {
+			break;
+		case 4:
 			zona = "NORTE";
 			importeZona = 2500;
-		} else {
+			break;
+		default:
 			zona = "No definida";
 			importeZona = 0;
 		}
 		
-		if (categoriaVendedor == 'P') {
+		switch (categoriaVendedor) {
+		case 'P':
 			categoria = "PRIMERA";
 			importeCategoria = 200;
-		} else if (categoriaVendedor == 'S') {
+			break;
+		case 'S':
 			categoria = "SEGUNDA";
 			importeCategoria = 150;
-		} else if (categoriaVendedor == 'T') {
+			break;
+		case 'T':
 			categoria = "TERCERA";
 			importeCategoria = 100;
-		} else {
+			break;
+		default:
 			categoria = "No definida";
 			importeCategoria = 0;
 		}
