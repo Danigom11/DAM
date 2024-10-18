@@ -1,4 +1,5 @@
 package Tema2.ejercicios;
+
 import java.util.Scanner;
 
 public class EjercicioDiasMeses {
@@ -9,16 +10,15 @@ public class EjercicioDiasMeses {
 		// 31: 1,3,5,7,8,10,12
 		// 30: 4,6,9,11
 		// 29: 2
-		
+
 		Scanner sc = new Scanner(System.in);
 		String mes;
 		int dias;
-		
+
 		System.out.print("Nombre del mes: ");
 		mes = sc.next();
-		
-		
-		switch(mes) {
+
+		switch (mes) {
 		case "Enero", "Marzo", "Mayo", "Julio", "Agosto", "Octubre", "Diciembre":
 			dias = 31;
 			break;
@@ -30,7 +30,22 @@ public class EjercicioDiasMeses {
 		default:
 			dias = 0;
 		}
-		
+
+		switch (mes) {
+		case "Enero", "Marzo", "Mayo", "Julio", "Agosto", "Octubre", "Diciembre" -> {
+			dias = 31;
+		}
+		case "Febrero" -> {
+			dias = 29;
+		}
+		case "Abril", "Junio", "Septiembre", "Noviembre" -> {
+			dias = 30;
+		}
+		default -> {
+			dias = 0;
+		}
+		}
+
 		System.out.println(mes + " tiene " + dias + " días.");
 		sc.close();
 	}
