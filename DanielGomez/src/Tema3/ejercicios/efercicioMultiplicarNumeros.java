@@ -19,7 +19,7 @@ public class efercicioMultiplicarNumeros {
 			c++;
 		}
 		System.out.println(resultado);
-		
+		sc.close();
 	}
 
 }

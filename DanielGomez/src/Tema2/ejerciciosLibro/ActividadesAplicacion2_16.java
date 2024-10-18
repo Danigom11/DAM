@@ -15,6 +15,7 @@ public class ActividadesAplicacion2_16 {
 		
 		resultado = n<0 ? n*-1:n;
 		System.out.println(resultado);
+		sc.close();
 	}
 
 }
