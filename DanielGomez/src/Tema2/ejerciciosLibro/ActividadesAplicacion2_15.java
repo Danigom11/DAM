@@ -1,7 +1,7 @@
 package Tema2.ejerciciosLibro;
 import java.util.Scanner;
 
-public class ActividadesjAplicacion2_15 {
+public class ActividadesAplicacion2_15 {
 
 	public static void main(String[] args) {
 		/*
