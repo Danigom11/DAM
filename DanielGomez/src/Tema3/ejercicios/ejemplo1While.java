@@ -1,6 +1,5 @@
 package Tema3.ejercicios;
 
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class ejemplo1While {
@@ -13,20 +12,20 @@ public class ejemplo1While {
 		// de un número que cumpla una condición, en este caso que sea > que 0.
 
 		int n = 0;
+		
 		System.out.print("Dame un número: ");
 		n = sc.nextInt();
 		sc.nextLine();
 
 		while (n <= 0) {
 			System.out.print("Dame un número: ");
-			try {
-				n = sc.nextInt();
-			} catch (InputMismatchException e) {
-				n = 0;
-			}
+			n = sc.nextInt();
 			sc.nextLine();
 		}
+		sc.close();
+		
 		System.out.println("Valor de n: " + n);
 		System.out.println("Fin");
+		
 	}
 }
