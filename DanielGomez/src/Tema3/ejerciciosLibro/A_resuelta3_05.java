@@ -2,7 +2,7 @@ package Tema3.ejerciciosLibro;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class A_resuelta3_5 {
+public class A_resuelta3_05 {
 	static Scanner sc = new Scanner(System.in);
 	public static void main(String[] args) {
 		// Desarrollar un juego que ayude a mejorar el cálculo mental de la suma. El

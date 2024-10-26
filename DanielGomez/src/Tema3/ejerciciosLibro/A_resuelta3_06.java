@@ -1,7 +1,7 @@
 package Tema3.ejerciciosLibro;
 import java.util.Scanner;
 
-public class A_resuelta3_6 {
+public class A_resuelta3_06 {
 	static Scanner sc = new Scanner(System.in);
 	public static void main(String[] args) {
 		int n;

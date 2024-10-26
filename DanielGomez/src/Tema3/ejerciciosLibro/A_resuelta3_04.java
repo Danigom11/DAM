@@ -2,7 +2,7 @@ package Tema3.ejerciciosLibro;
 
 import java.util.Scanner;
 
-public class A_resuelta3_4 {
+public class A_resuelta3_04 {
 	static Scanner sc = new Scanner(System.in);
 
 	public static void main(String[] args) {

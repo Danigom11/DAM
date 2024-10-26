@@ -2,7 +2,7 @@ package Tema3.ejerciciosLibro;
 
 import java.util.Scanner;
 
-public class A_resuelta3_2 {
+public class A_resuelta3_02 {
 
 	public static void main(String[] args) {
 

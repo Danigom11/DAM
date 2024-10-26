@@ -1,6 +1,6 @@
 package Tema3.ejerciciosLibro;
 
-public class A_resuelta3_7 {
+public class A_resuelta3_07 {
 
 	public static void main(String[] args) {
 		// Escribir todos los múltiplos de 7 menores que 100
