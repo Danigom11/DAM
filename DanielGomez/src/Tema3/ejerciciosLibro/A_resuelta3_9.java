@@ -8,7 +8,7 @@ public class A_resuelta3_9 {
 
 	public static void main(String[] args) {
 		int n = 0;
-		
+
 		do {
 			System.out.print("Introduce un número entre 1 y 10: ");
 			try {
@@ -17,15 +17,11 @@ public class A_resuelta3_9 {
 				System.out.println("Error al introducir los datos.");
 				System.exit(0);
 			}
-		}
-		while (n<1 || n>10);
-		
-		for (int i = 1; i<=n; i++) {
-			System.out.println(n + " x " + i + " = " + (n*i));
-		}
-		
-		 
+		} while (n < 1 || n > 10);
 
+		for (int i = 1; i <= n; i++) {
+			System.out.println(n + " x " + i + " = " + (n * i));
+		}
 	}
 
 }

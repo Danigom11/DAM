@@ -21,10 +21,10 @@ public class A_resuelta3_8 {
 			}
 			sc.nextLine();
 			suma += n;
+			media = (double) suma / i;
+			System.out.printf("Media: %,d / %,d = %,.2f", suma, i, media);
+
 		}
-		media = (double)suma / i;
-		System.out.printf("Media: %,d / %,d = %,.2f", suma, i, media);
 
 	}
-
 }
