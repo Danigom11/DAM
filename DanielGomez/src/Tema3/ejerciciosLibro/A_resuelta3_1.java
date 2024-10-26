@@ -3,34 +3,30 @@ package Tema3.ejerciciosLibro;
 import java.util.Scanner;
 
 public class A_resuelta3_1 {
+	static Scanner sc = new Scanner(System.in);
 
 	public static void main(String[] args) {
-		//
-		short maximo = -1, minimo = 150, n = 0;
-		Scanner sc = new Scanner(System.in);
+		// Programa que muestre para cada número introducido por teclado si es par, si
+		// es positivo y su cuadrado. Se repite hasta que el número introducido sea 0.
 
-		System.out.print("Introduce las edades de alumnos que quieras y cuando termines escribe -1: ");
-		n = sc.nextShort();
+		int n = 1;
 
-		while (n != -1) {
-
-			if (n > maximo) {
-				maximo = n;
-			}
-			if (n < minimo) {
-				minimo = n;
-			}
-
-			System.out.print("Introduce las edades de alumnos que quieras y cuando termines escribe -1: ");
-			n = sc.nextShort();
-
+		while (n != 0) {
+			System.out.print("Introduce un número (0 para salir): ");
+			n = sc.nextInt();
+			sc.nextLine();
+			if (n != 0) {
+				if (n % 2 == 0)
+					System.out.println("Número par.");
+				else
+					System.out.println("Número impar.");
+				if (n > 0)
+					System.out.println("Es positivo.");
+				else
+					System.out.println("Es negativo.");
+				System.out.println("Su cuadrado es: " + (Math.pow(n, 2)));
+			} else
+				System.out.println("¡Adios!");
 		}
-
-		System.out.println("Edad máxima introducida: " + maximo);
-		System.out.println("Edad mínima introducida: " + minimo);
-
-		sc.close();
-
 	}
-
 }
