@@ -5,6 +5,7 @@ public class forNumerosParesImpares {
 	public static void main(String[] args) {
 		// Pares 100 impares hasta 99
 		String pares1 = "", impares1 = "";
+		final int LIMITE = 100;
 		
 		for (int i = 0; i <= 100; i += 2) {
 			pares1 += i + (i == 100 ? "": ", ");
@@ -48,10 +49,10 @@ public class forNumerosParesImpares {
 		
 		String pares3 = "", impares3 = "";
 		
-		for (int par = 94, impar = 95; par < 102 && impar < 10 ; par+=2, impar +=2) {
+		for (int par = 2, impar = 1; par <= LIMITE ; par+=2, impar +=2) {
 			
 				pares3 += par + (par == 100 ? "": ", ");
-				impares3 += impar + (impar == 99 ? "": ", ");
+				impares3 += impar + (impar == LIMITE-1  ? "": ", ");
 		
 		}
 		

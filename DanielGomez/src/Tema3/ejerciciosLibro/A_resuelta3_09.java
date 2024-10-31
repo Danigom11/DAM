@@ -19,7 +19,7 @@ public class A_resuelta3_09 {
 			}
 		} while (n < 1 || n > 10);
 
-		for (int i = 1; i <= n; i++) {
+		for (int i = 1; i <= 10; i++) {
 			System.out.println(n + " x " + i + " = " + (n * i));
 		}
 	}
