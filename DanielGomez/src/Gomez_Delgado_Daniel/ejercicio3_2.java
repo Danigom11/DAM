@@ -1,9 +1,9 @@
-package Tema3.ejercicios;
+package Gomez_Delgado_Daniel;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class ejercicio7_1 {
+public class ejercicio3_2 {
 	static Scanner sc = new Scanner(System.in);
 
 	public static void main(String[] args) {
@@ -66,7 +66,7 @@ public class ejercicio7_1 {
 				while (notaAsignatura < 1 || notaAsignatura > 10) {
 					System.out.print("\t\tNota (entre 1 y 10): ");
 					try {
-						notaAsignatura = sc.nextInt();
+					notaAsignatura = sc.nextInt();
 					} catch (InputMismatchException e) {
 						System.out.println("Introduce una cantidad correcta.");
 					}
