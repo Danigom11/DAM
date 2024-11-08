@@ -7,6 +7,8 @@ public class ejercicio3_2 {
 	static Scanner sc = new Scanner(System.in);
 
 	public static void main(String[] args) {
+		// Ejercicio alumnos
+		
 		// Variables generales y que se usan al final
 		int numeroAlumnos = 0;
 		String resultados = "";
@@ -123,6 +125,5 @@ public class ejercicio3_2 {
 		System.out.printf("\tNota media: %,.2f%n", notaMediaTotalMaxima);
 		System.out.println("Alumno con < nota media: " + nombreAlumnoNotaMediaMinima);
 		System.out.printf("\tNota media: %,.2f%n", notaMediaTotalMinima);
-
 	}
 }
