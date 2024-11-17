@@ -1,36 +1,28 @@
 package Tema4.ejercicios;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class ejercicio_Varias_Funciones {
 
 	public static void main(String[] args) {
-		Scanner sc = new Scanner(System.in);
-		double n1, n2;
-		short s, dia;
-		System.out.print("Número 1: ");
-		n1 = sc.nextDouble();
-		
-		System.out.print("Número 2: ");
-		n2 = sc.nextDouble();
-		
+
 		// Llamada a función uno
-		System.out.println("El producto de los dos números es: " + producto(n1, n2));
-		
+		System.out.println("El producto de los dos números es: " + producto(3, 2));
+
 		// Llamada a función dos
-		mostrarProducto(n1, n2);
-		
+		mostrarProducto(3, 2);
+
 		// Llamada a función tres
-		System.out.print("Introduce un número entre 1 y 12: " );
-		s = sc.nextShort();
-		sc.nextLine();
-		System.out.println("¿El número era correcto? " + entre1Y12(s));
-		
+		int num = 3;
+		System.out.println("¿El número era correcto? " + entre1Y12((short)num));
+
 		// Llamada a función cuatro
-		System.out.print("Dime un número de día de la semana: ");
-		dia = sc.nextShort();
-		System.out.println(diaSemana(dia));		
+		System.out.println(diaSemana((short)4));
 		
+		// Llamada a función cinco
+		System.out.println("Correcto. El " + rangoNumeros("Dame un número entre ", 10, 2) + " está entre esos dos números.");
+
 	}
 
 	// Realiza una función que reciba dos números y devuelva el producto.
@@ -80,8 +72,12 @@ public class ejercicio_Varias_Funciones {
 		Scanner sc = new Scanner(System.in);
 
 		while (n < minimo || n > maximo) {
-			System.out.print("Dime un número entre " + maximo + " y " + minimo + ": ");
-			n = sc.nextInt();
+			System.out.print(s + maximo + " y " + minimo + ": ");
+			try {
+				n = sc.nextInt();
+			} catch (InputMismatchException e) {
+				System.out.println("Error");
+			}
 			sc.nextLine();
 		}
 

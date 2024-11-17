@@ -8,12 +8,12 @@ public class ejercicio_Cuadrados {
 	public static void main(String[] args) {
 		// Método que reciba un número leído por teclado y muestre en pantalla mediante
 		// un carácter que se leerá por teclado un cuadrado.
-		int n = 0;
+		int n = 1;
 		char c;
 
 		Scanner sc = new Scanner(System.in);
 
-		while (n <= 0) { 
+		while (n > 0) { 
 			System.out.print("Dame un número: ");
 			try {
 			n = sc.nextInt();
@@ -21,14 +21,14 @@ public class ejercicio_Cuadrados {
 				System.out.println("Error.");
 			}
 			sc.nextLine();
+			
+			System.out.print("Dame un carácter: ");
+			c = sc.nextLine().charAt(0);			
+
+			cuadrados(n, c);
+			sc.close();
 		}
 		
-		System.out.print("Dame un carácter: ");
-		c = sc.nextLine().charAt(0);
-		
-
-		cuadrados(n, c);
-
 	}
 
 	public static void cuadrados(int n, char c) {
