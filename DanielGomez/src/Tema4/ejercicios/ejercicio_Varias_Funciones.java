@@ -22,8 +22,10 @@ public class ejercicio_Varias_Funciones {
 		
 		// Llamada a función cinco
 		System.out.println("Correcto. El " + rangoNumeros("Dame un número entre ", 10, 2) + " está entre esos dos números.");
-
-	}
+		System.out.println(rangoNumeros("Dime un número", 100, 1)  );
+		System.out.println(rangoNumeros("Dime el número", 50, 25)  );
+		
+		}
 
 	// Realiza una función que reciba dos números y devuelva el producto.
 	public static double producto(double n1, double n2) {
