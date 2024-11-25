@@ -52,18 +52,20 @@ public class ejercicio3_Montanas {
 	}
 
 	public static int pedirTeclado(String mensaje, int min) {
-		int n = min - 1;
-		while (n < min) {
+		int n;
+		while (true) {
 			System.out.print(mensaje);
 			try {
 				n = sc.nextInt();
+				if (n>=min) {
+					return n;
+				}
+				System.out.println("Introduce un número mayor que " + n + ".");
 			} catch (InputMismatchException e) {
 				System.out.print("Error.");
 			}
 			sc.nextLine();
 		}
-		return n;
-
 	}
 
 }

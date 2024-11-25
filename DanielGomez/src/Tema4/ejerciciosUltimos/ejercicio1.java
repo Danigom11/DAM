@@ -3,16 +3,16 @@ package Tema4.ejerciciosUltimos;
 public class ejercicio1 {
 
 	public static void main(String[] args) {
-		NombreDiaSemana(13, 4);
+		nombreDiaSemana(12, 25);
 	}
 
-	public static void NombreDiaSemana(int mes, int dia) {
+	public static void nombreDiaSemana(int mes, int dia) {
 		int diaAgno = 0;
 		int numFinal = 0;
-		String resultado = "", nombreMes = "";
+		String resultado = "";
 
 		switch (mes) {
-		case 1, 3, 5, 7, 8, 10 -> {
+		case 1, 3, 5, 7, 8, 10, 12 -> {
 			if (dia > 31) {
 				System.out.println("Día incorrecto");
 				return;
@@ -35,21 +35,6 @@ public class ejercicio1 {
 			System.out.println("Mes incorrecto");
 			return;
 		}
-		}
-
-		switch (mes) {
-		case 1 -> nombreMes = "Enero";
-		case 2 -> nombreMes = "Febrero";
-		case 3 -> nombreMes = "Marzo";
-		case 4 -> nombreMes = "Abril";
-		case 5 -> nombreMes = "Mayo";
-		case 6 -> nombreMes = "Junio";
-		case 7 -> nombreMes = "Julio";
-		case 8 -> nombreMes = "Agosto";
-		case 9 -> nombreMes = "Septiembre";
-		case 10 -> nombreMes = "Octubre";
-		case 11 -> nombreMes = "Noviembre";
-		case 12 -> nombreMes = "Diciembre";
 		}
 
 		for (int i = 1; i < mes; i++) {
@@ -76,7 +61,26 @@ public class ejercicio1 {
 		case 7 -> resultado = "Jueves";
 		}
 
-		System.out.println("El día " + dia + " de " + nombreMes + " es " + resultado);
+		System.out.println("El día " + dia + " de " + nombreMes(mes) + " es " + resultado);
 
+	}
+
+	private static String nombreMes(int mes) {
+		String nombreMes = "";
+		switch (mes) {
+		case 1 -> nombreMes = "Enero";
+		case 2 -> nombreMes = "Febrero";
+		case 3 -> nombreMes = "Marzo";
+		case 4 -> nombreMes = "Abril";
+		case 5 -> nombreMes = "Mayo";
+		case 6 -> nombreMes = "Junio";
+		case 7 -> nombreMes = "Julio";
+		case 8 -> nombreMes = "Agosto";
+		case 9 -> nombreMes = "Septiembre";
+		case 10 -> nombreMes = "Octubre";
+		case 11 -> nombreMes = "Noviembre";
+		case 12 -> nombreMes = "Diciembre";
+		}
+		return nombreMes;
 	}
 }

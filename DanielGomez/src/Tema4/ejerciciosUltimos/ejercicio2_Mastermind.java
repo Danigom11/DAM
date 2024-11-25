@@ -8,7 +8,7 @@ public class ejercicio2_Mastermind {
 
 	public static void main(String[] args) {
 		// Se define una combinación numerica de 4 cifras en la llamada a la función.
-		mastermind(0, 9, 3, 0);
+		// mastermind(0, 9, 3, 0);
 		mastermind(0, 9, 3, 6);
 	}
 
@@ -19,6 +19,7 @@ public class ejercicio2_Mastermind {
 	// sale, muestra un mensaje y vuelve a leer.
 	// Después comprobar aciertos y coincidencias.
 	public static void mastermind(int objetivo1, int objetivo2, int objetivo3, int objetivo4) {
+
 		// Controlar que los números introducidos no se repiten o son correctos
 		if (objetivo1 == objetivo2 || objetivo1 == objetivo3 || objetivo1 == objetivo4 || objetivo2 == objetivo3
 				|| objetivo2 == objetivo4 || objetivo3 == objetivo4) {
@@ -33,6 +34,7 @@ public class ejercicio2_Mastermind {
 			int n1 = 0, n2 = 0, n3 = 0, n4 = 0;
 			int aciertos = 0, coincidencias = 0;
 			String numIntroducidos = "[";
+
 			System.out.println("Intento: " + contador);
 
 			n1 = numeroMaximoMinimo("\tIntroduce un número (0 y 9) 1: ", 0, 9);
@@ -80,22 +82,26 @@ public class ejercicio2_Mastermind {
 
 			contador++;
 		}
+		System.out.println("Has perdido... La conbinación ganadora era: " + objetivo1 + objetivo2 + objetivo3 + objetivo4);
 
 	}
 
 	// Función control números
 	public static int numeroMaximoMinimo(String mensaje, int min, int max) {
-		int n = max + 1;
-		while (n < min || n > max) {
+		int n;
+
+		while (true) {
 			System.out.print(mensaje);
 			try {
 				n = sc.nextInt();
+				if (n>=min && n<=max)
+					return n;
+				System.out.println("\tEl número debe estar entre " + min + " y " + max + ".");
 			} catch (InputMismatchException e) {
 				System.out.print("Error. ");
 			}
 			sc.nextLine();
 		}
-		return n;
 	}
 
 }
