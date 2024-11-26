@@ -3,7 +3,7 @@ package Tema4.figuras;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class diamanteHueco {
+public class romboHueco {
 	static Scanner sc = new Scanner(System.in);
 
 	public static void main(String[] args) {
