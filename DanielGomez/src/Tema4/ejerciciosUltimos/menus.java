@@ -41,6 +41,7 @@ public class menus {
 			try {
 				int numero = sc.nextInt();
 				if (numero >= minimo && numero <= maximo) {
+					sc.nextLine();
 					return numero;
 				}
 				System.out.println("Introduce un número entre " + minimo + " y " + maximo + ".");
