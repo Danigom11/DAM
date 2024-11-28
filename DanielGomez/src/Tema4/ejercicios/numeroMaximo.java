@@ -9,7 +9,7 @@ public class numeroMaximo {
 		 * Return the maximum number you can get by changing at most one digit (6
 		 * becomes 9, and 9 becomes 6).
 		 */
-		numeroMaximo(0);
+		numeroMaximo(8);
 	}
 
 

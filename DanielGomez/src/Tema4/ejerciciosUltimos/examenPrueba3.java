@@ -14,7 +14,7 @@ public class examenPrueba3 {
 		int horas = 0, tarifaHora = 0, horasExtras = 0;
 		String nombre;
 		double salarioTotal;
-
+		
 		// Nombre
 		System.out.print("Introduce el nombre del empleado: ");
 		nombre = sc.nextLine();

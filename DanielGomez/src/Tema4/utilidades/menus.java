@@ -1,4 +1,4 @@
-package Tema4.ejerciciosUltimos;
+package Tema4.utilidades;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -21,7 +21,7 @@ public class menus {
 					3. Salir
 					=============================================
 					""");
-			int eleccion = numeroMaximoMinimo("Elige de 1 a 3: ", 1, 3);
+			int eleccion = pedirNumero("Elige de 1 a 3: ", 1, 3);
 
 			switch (eleccion) {
 			case 1 -> System.out.println("Lo que haga el 1");
@@ -35,7 +35,7 @@ public class menus {
 
 	}
 
-	public static int numeroMaximoMinimo(String mensaje, int minimo, int maximo) {
+	public static int pedirNumero(String mensaje, int minimo, int maximo) {
 		while (true) {
 			System.out.print(mensaje);
 			try {
@@ -45,6 +45,23 @@ public class menus {
 					return numero;
 				}
 				System.out.println("Introduce un número entre " + minimo + " y " + maximo + ".");
+			} catch (InputMismatchException e) {
+				System.out.print("Error. ");
+			}
+			sc.nextLine();
+		}
+	}
+	
+	public static int pedirNumero(String mensaje, int minimo) {
+		while (true) {
+			System.out.print(mensaje);
+			try {
+				int numero = sc.nextInt();
+				if (numero >= minimo) {
+					sc.nextLine();
+					return numero;
+				}
+				System.out.println("Introduce un número mayor que " + (minimo) +". ");
 			} catch (InputMismatchException e) {
 				System.out.print("Error. ");
 			}

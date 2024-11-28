@@ -1,4 +1,4 @@
-package Tema4.ejerciciosUltimos;
+package Tema4.utilidades;
 
 public class convertidores_numeros {
 
@@ -7,6 +7,7 @@ public class convertidores_numeros {
 		darVueltaNumeroAString(n);
 		numeroCifras(n);
 		darVueltaNumeroConComas(n);
+		System.out.println(invertirNumero(n));
 	}
 
 	public static void darVueltaNumeroAString(int n) {
@@ -37,6 +38,15 @@ public class convertidores_numeros {
 
 	}
 	
+	public static long invertirNumero(long numero) {
+		long numeroInvertido = 0;
+		while (numero != 0) {
+			long digito = numero % 10;
+			numeroInvertido = numeroInvertido * 10 + digito;
+			numero /= 10;
+		}
+		return numeroInvertido;
+	}
 	
 	
 
