@@ -15,7 +15,7 @@ public class menus {
 		while (true) {
 			System.out.println("""
 					=============================================
-					MENÜ
+					MENÚ
 					Elige:
 					1. ----
 					2. ----
