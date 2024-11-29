@@ -13,7 +13,7 @@ public class trianguloRepetidoDebajoConEspacios {
 
 	public static void triangulo() {
 
-		int n = leerEntero("Introduce un nº > 0: ", 0);
+		int n = leerEntero("Introduce un nº > 0: ", 1);
 		char c;
 		System.out.print("Introduce un carácter: ");
 		c = sc.next().charAt(0);

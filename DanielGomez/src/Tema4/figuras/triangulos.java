@@ -190,6 +190,5 @@ public class triangulos {
 			impar4 -= 2;
 			System.out.println();
 		}
-
 	}
 }

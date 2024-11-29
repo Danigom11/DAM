@@ -7,6 +7,7 @@ public class menus {
 	static Scanner sc = new Scanner(System.in);
 
 	public static void main(String[] args) {
+		
 		menu();
 	}
 
@@ -18,15 +19,17 @@ public class menus {
 					Elige:
 					1. ----
 					2. ----
-					3. Salir
+					3. ----
+					4. Salir
 					=============================================
 					""");
-			int eleccion = pedirNumero("Elige de 1 a 3: ", 1, 3);
+			int eleccion = pedirNumero("Elige de 1 a 3: ", 1, 4);
 
 			switch (eleccion) {
 			case 1 -> System.out.println("Lo que haga el 1");
 			case 2 -> System.out.println("Lo que haga el 2");
-			case 3 -> {
+			case 3 -> System.out.println("Lo que haga el 3");
+			case 4 -> {
 				System.out.println("Adios.");
 				return;
 			}
