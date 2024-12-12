@@ -1,3 +1,4 @@
+package Tema4.ejercicios;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
