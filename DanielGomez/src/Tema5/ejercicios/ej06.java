@@ -1,6 +1,6 @@
 package Tema5.ejercicios;
 
-public class ejercicio6 {
+public class ej06 {
 
 	public static void main(String[] args) {
 		int numero[] = new int [3];

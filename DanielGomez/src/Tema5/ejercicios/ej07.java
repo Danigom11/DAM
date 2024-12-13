@@ -1,6 +1,6 @@
 package Tema5.ejercicios;
 
-public class ejercicio7 {
+public class ej07 {
 
 	public static void main(String[] args) {
 		int a[] = {1,2,3};

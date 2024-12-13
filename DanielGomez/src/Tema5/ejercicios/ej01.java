@@ -1,6 +1,6 @@
 package Tema5.ejercicios;
 
-public class ejercicio1 {
+public class ej01 {
 
 	public static void main(String[] args) {
 		int longitud = 8;

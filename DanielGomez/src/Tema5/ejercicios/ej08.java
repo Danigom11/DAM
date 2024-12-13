@@ -1,6 +1,6 @@
 package Tema5.ejercicios;
 
-public class ejercicios8 {
+public class ej08 {
 
 	public static void main(String[] args) {
 		// Construye una tabla de 10 elementos del tipo que prefieras.

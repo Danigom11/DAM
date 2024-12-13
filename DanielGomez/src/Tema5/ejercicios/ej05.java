@@ -2,7 +2,7 @@ package Tema5.ejercicios;
 
 import java.util.Scanner;
 
-public class ejercicio5 {
+public class ej05 {
 
 	public static void main(String[] args) {
 		// Dividir un string en sus letras
