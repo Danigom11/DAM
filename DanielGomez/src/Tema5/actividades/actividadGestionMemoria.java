@@ -7,9 +7,6 @@ public class actividadGestionMemoria {
 	static Scanner sc = new Scanner(System.in);
 
 	public static void main(String[] args) {
-		/*
-		 * 
-		 */
 		while (true) {
 			System.out.println("""
 					Elige el tipo de dato para la tabla:
@@ -17,6 +14,7 @@ public class actividadGestionMemoria {
 					2) Double
 					3) Booleano
 					0) Salir""");
+
 			int eleccion = pedirNumero("Elección: ", 0, 3);
 			System.out.println();
 			switch (eleccion) {
@@ -38,7 +36,7 @@ public class actividadGestionMemoria {
 
 		// Introducir los valores de la tabla
 		for (int i = 0; i < longitud; i++) {
-			int valor = pedirNumero("Dime el valor número " + (i + 1) + ": ");
+			int valor = pedirNumeroInt("Dime el valor número " + (i + 1) + ": ");
 			tabla[i] = valor;
 		}
 
@@ -49,10 +47,9 @@ public class actividadGestionMemoria {
 		}
 		System.out.println("}");
 
-		// Posiciones en memoria
-		System.out.println("La tabla ocupa la siguiente posicion en memoria: ");
-		System.out.println(tabla);
-		System.out.println();
+		// Posicion en memoria de la tabla
+		String posicionMemoria = tabla.toString();
+		posicionMemoria(longitud, posicionMemoria, 32);
 	}
 
 	private static void tablaDouble() {
@@ -73,11 +70,10 @@ public class actividadGestionMemoria {
 		}
 		System.out.println("}");
 
-		// Posiciones en memoria
-		System.out.println("La tabla ocupa la siguiente posicion en memoria: ");
-		System.out.println(tabla);
-		System.out.println();
-		
+		// Posicion en memoria de la tabla
+		String posicionMemoria = tabla.toString();
+		posicionMemoria(longitud, posicionMemoria, 64);
+
 	}
 
 	private static void tablaBooleano() {
@@ -98,9 +94,23 @@ public class actividadGestionMemoria {
 		}
 		System.out.println("}");
 
-		// Posiciones en memoria
+		// Posicion en memoria de la tabla
+		String posicionMemoria = tabla.toString();
+		posicionMemoria(longitud, posicionMemoria, 8);
+	}
+
+	private static void posicionMemoria(int longitud, String posicionMemoria, int espacioTipo) {
 		System.out.println("La tabla ocupa la siguiente posicion en memoria: ");
-		System.out.println(tabla);
+
+		String posicion = posicionMemoria.substring(3, posicionMemoria.length());
+		String posicionInicio = posicionMemoria.substring(0, 3);
+		int numero = Integer.parseInt(posicion, 16);
+
+		for (int i = 0; i < longitud; i++) {
+			numero += espacioTipo;
+			String hex = Integer.toHexString(numero);
+			System.out.println(posicionInicio + hex);
+		}
 		System.out.println();
 	}
 
@@ -138,7 +148,7 @@ public class actividadGestionMemoria {
 		}
 	}
 
-	public static int pedirNumero(String mensaje) {
+	public static int pedirNumeroInt(String mensaje) {
 		while (true) {
 			System.out.print(mensaje);
 			try {
@@ -151,7 +161,7 @@ public class actividadGestionMemoria {
 			sc.nextLine();
 		}
 	}
-	
+
 	public static double pedirNumeroDouble(String mensaje) {
 		while (true) {
 			System.out.print(mensaje);
@@ -165,19 +175,24 @@ public class actividadGestionMemoria {
 			sc.nextLine();
 		}
 	}
-	
+
 	public static boolean pedirBooleano(String mensaje) {
+		Scanner sc = new Scanner(System.in);
+		boolean numero = false;
+
 		while (true) {
 			System.out.print(mensaje);
-			try {
-				boolean numero = sc.nextBoolean();
-				sc.nextLine();
-				return numero;
-			} catch (InputMismatchException e) {
-				System.out.print("Introduce un valor correcto. ");
+
+			if (sc.hasNextBoolean()) {
+				numero = sc.nextBoolean();
+				break;
+			} else {
+				System.out.println("Por favor, introduce 'true' o 'false'.");
+				sc.next();
 			}
-			sc.nextLine();
 		}
+
+		return numero;
 	}
 
 }
