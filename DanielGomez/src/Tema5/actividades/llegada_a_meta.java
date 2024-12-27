@@ -9,24 +9,13 @@ public class llegada_a_meta {
 	public static void main(String[] args) {
 
 		/*
-		 * Ejercicio 4: llegada_a_meta Diseña una aplicación para gestionar la llegada a
-		 * meta de los participantes de una carrera. Cada uno de ellos dispone de un
-		 * dorsal (un número entero) que los identifica. En la aplicación se introduce
-		 * el número de dorsal de cada corredor cuando este llega a la meta. Para
-		 * indicar que la carrera ha finalizado (han llegado todos los corredores a la
-		 * meta), se introduce como dorsal el número —1. A continuación, la aplicación
-		 * solicita información extra de los corredores. En primer lugar, se introducen
-		 * los dorsales de todos los corredores menores de edad; para premiarlos por su
-		 * esfuerzo se les avanza un puesto en el ranking general de la carrera, es
-		 * decir, es como si hubieran adelantado al corredor que llevaban delante. En
-		 * segundo lugar, se introducen los dorsales de los corredores que han dado
-		 * positivo en el test antidopaje, lo que provoca su expulsión inmediata. Para
-		 * finalizar, se introducen los dorsales de los corredores que no han pagado su
-		 * inscripción en la carrera, lo que provoca que se releguen a los últimos
-		 * puestos del ranking general. La aplicación debe mostrar los dorsales de los
-		 * corredores que han conseguido las medallas de oro, plata y bronce
+		 * Me he tirado un montón de tiempo con este ejercicio.
+		 * Ha sido chulo de hacer.
+		 * La verdad es que me ha venido bien para ir pillando el truco a lo de los
+		 * arrays y como ir dividiendo el código y quitando el código repetido
+		 * que tenía un montón.
+		 * !Gracias!
 		 */
-		
 		llegadaAMeta();
 	}
 
@@ -34,101 +23,99 @@ public class llegada_a_meta {
 		System.out.println("""
 				=======================================================
 				LLEGADA A META
-				Introduce los dorsales según han llegado a meta.
-				Al menos uno para poder terminar el programa.
-				Después los menores de edad, los que han dado positivo
-				en el test antidopaje y los que no han pagado su
-				inscripción. Y verás los tres primeros.
 				=======================================================
 				""");
 		int[] corredores = dorsalesEnMeta();
-		corredores = dorsalesMenoresEdad(corredores);
-		corredores = dorsalesPositivoAntidopaje(corredores);
-		corredores = dorsalesNoInscritos(corredores);
+		System.out.println("_________________________________________________________");
+		corredores = cambiosResultados(corredores, 1, "CORREDORES MENORES DE EDAD", "menor de edad");
+		System.out.println("_________________________________________________________");
+		corredores = cambiosResultados(corredores, 2, "POSITIVOS EN EL TEST ANTIDOPAJE", "positivo test antidopaje");
+		System.out.println("_________________________________________________________");
+		corredores = cambiosResultados(corredores, 3, "QUE NO HAN PAGADO LA INSCRIPCIÓN", "no inscrito");
+		System.out.println("_________________________________________________________");
 
 		// Resultados finales
-		System.out.println("MEDALLA DE BRONCE PARA...");
-		System.out.println("El dorsal número: " + corredores[corredores.length - 3]);
-		System.out.println("MEDALLA DE PLATA PARA...");
-		System.out.println("El dorsal número: " + corredores[corredores.length - 2]);
-		System.out.println("MEDALLA DE ORO PARA...");
-		System.out.println("El dorsal número: " + corredores[corredores.length - 1]);
+		System.out.println("\nY LOS RESULTADOS SON:");
+		if (corredores.length > 2) {
+			System.out.println("\nMEDALLA DE BRONCE PARA...");
+			System.out.println("\tEl dorsal número: " + corredores[2]);
+		}
+		if (corredores.length > 1) {
+			System.out.println("\nMEDALLA DE PLATA PARA...");
+			System.out.println("\tEl dorsal número: " + corredores[1]);
+		}
+		if (corredores.length > 0) {
+			System.out.println("\nMEDALLA DE ORO PARA...");
+			System.out.println("\tEl dorsal número: " + corredores[0]);
+		} else {
+			System.out.println("\tNo hay corredores, no hay medallas...");
+		}
 	}
 
 	// Función para los que no han pagado la inscripción
-	public static int[] dorsalesNoInscritos(int[] tabla) {
-		System.out.println("AHORA DIME LOS DORSALES QUE NO HAN PAGADO LA INSCRIPCIÓN");
-		System.out.println("Dorsales disponibles: " + Arrays.toString(tabla));
+	public static int[] moverAlUltimoPuesto(int[] tabla, int posicion) {
+		// Controlar que no sea el último (posición 0)
+		if (posicion > 0) {
 
-		while (true) {
-			int dorsal = pedirNumeroEntero("\tDorsal no inscrito (-1 salir): ", -1);
+			// Guardar el valor
+			int aux = tabla[posicion];
 
-			// Control de salida
-			if (dorsal == -1) {
-				return tabla;
+			// Mover un puesto para arriba a los que estaban antes
+			for (int i = posicion; i < tabla.length - 1; i++) {
+				tabla[i] = tabla[i + 1];
 			}
 
-			int posicion = Arrays.binarySearch(tabla, dorsal);
-
-			// Control dorsal válido
-			if (posicion < 0) {
-				System.out.println("Introduce un dorsal válido.");
-			} else {
-
-				// Controlar que no sea el último (posición 0)
-				if (posicion > 0) {
-
-					// Guardar el valor
-					int aux = tabla[posicion];
-
-					// Mover un puesto para arriba a los que estaban antes
-					for (int i = posicion; i > 0; i--) {
-						tabla[i + 1] = tabla[i];
-					}
-
-					// Poner el último el dorsal
-					tabla[0] = aux;
-				}
-			}
+			// Poner el último el dorsal
+			tabla[tabla.length - 1] = aux;
 		}
+
+		// Mostrar el cambio realizado
+		System.out.println("\tLa clasificación va así: " + Arrays.toString(tabla));
+
+		return tabla;
+
 	}
 
 	// Función para positivos en el test antidopaje
-	public static int[] dorsalesPositivoAntidopaje(int tabla[]) {
-		System.out.println("AHORA DIME LOS DORSALES DE LOS POSITIVOS EN EL TEST ANTIDOPAJE");
-		System.out.println("Dorsales disponibles: " + Arrays.toString(tabla));
-
-		while (true) {
-			int dorsal = pedirNumeroEntero("\tDorsal positivo test antidopaje (-1 salir)", -1);
-			int posicion = Arrays.binarySearch(tabla, dorsal);
-
-			// Control salida
-			if (dorsal == -1) {
-				return tabla;
-			}
-
-			// Control dorsal válido
-			if (posicion < 0) {
-				System.out.println("Introduce un dorsal válido.");
-			} else {
-
-				// Eliminar el dorsal moviéndolo al final y quitando la última posición
-				int aux = tabla[tabla.length - 1];
-				tabla[tabla.length - 1] = tabla[posicion];
-				tabla[posicion] = aux;
-				tabla = Arrays.copyOf(tabla, tabla.length - 1);
-			}
+	public static int[] eliminarUnPuesto(int tabla[], int posicion) {
+		// Mover todos los elementos después de posición un puesto más arriba
+		for (int i = posicion; i < tabla.length - 1; i++) {
+			tabla[i] = tabla[i + 1];
 		}
+		// Hacer la tabla un puesto más pequeña eliminando el último
+		tabla = Arrays.copyOf(tabla, tabla.length - 1);
+
+		// Mostrar el cambio realizado
+		System.out.println("\tLa clasificación va así: " + Arrays.toString(tabla));
+
+		return tabla;
 	}
 
 	// Función para dorsales menores de edad
-	public static int[] dorsalesMenoresEdad(int tabla[]) {
-		System.out.println("AHORA DIME LOS DORSALES DE LOS CORREDORES MENORES DE EDAD");
+	public static int[] subirUnPuesto(int tabla[], int posicion) {
+		// Moverlo un puesto hacia arriba en la tabla
+		// Controlar que no sea el primero
+		if (posicion > 0) {
+			int aux = tabla[posicion - 1];
+			tabla[posicion - 1] = tabla[posicion];
+			tabla[posicion] = aux;
+		}
+
+		// Mostrar el cambio realizado
+		System.out.println("\tLa clasificación va así: " + Arrays.toString(tabla));
+
+		return tabla;
+
+	}
+
+	// Función para ir introduciendo cambios en los resultados
+	public static int[] cambiosResultados(int[] tabla, int funcion, String mensaje1, String mensaje2) {
+		System.out.println("\nAHORA DIME LOS DORSALES DE LOS " + mensaje1);
 		System.out.println("Dorsales disponibles: " + Arrays.toString(tabla));
 
 		while (true) {
-			int dorsal = pedirNumeroEntero("\tMenor de edad (-1 salir)", -1);
-			int posicion = Arrays.binarySearch(tabla, dorsal);
+			int dorsal = pedirNumeroEntero("\tDorsal " + mensaje2 + " (-1 salir): ", -1);
+			int posicion = busquedaTablaNoOrdenada(tabla, dorsal);
 
 			// Controlar salida
 			if (dorsal == -1) {
@@ -136,24 +123,30 @@ public class llegada_a_meta {
 			}
 
 			// Controlar que el dorsal elegido está en la lista
-			if (posicion < 0) {
-				System.out.println("Introduce un dorsal válido.");
+			if (posicion == -1) {
+				System.out.println("\tIntroduce un dorsal válido.");
 			} else {
 
-				// Moverlo un puesto hacia arriba en la tabla
-				// Controlar que no sea el primero (última posición de la tabla)
-				if (posicion < tabla.length) {
-					int aux = tabla[posicion + 1];
-					tabla[posicion + 1] = dorsal;
-					tabla[posicion + 1] = aux;
+				switch (funcion) {
+				case 1 -> {
+					tabla = subirUnPuesto(tabla, posicion);
+				}
+				case 2 -> {
+					tabla = eliminarUnPuesto(tabla, posicion);
+				}
+				case 3 -> {
+					tabla = moverAlUltimoPuesto(tabla, posicion);
+				}
 				}
 			}
 		}
+
 	}
 
 	// Función para hacer la tabla con todos los corredores que han llegado a meta
 	public static int[] dorsalesEnMeta() {
 		int[] corredores = new int[0];
+		System.out.println("Introduce los dorsales en el orden en que han llegado (-1 salir). ");
 
 		while (true) {
 			int dorsal = pedirNumeroEntero("\tDorsal número: ", -1);
@@ -161,18 +154,43 @@ public class llegada_a_meta {
 			// Control de salida
 			if (dorsal == -1) {
 				if (corredores.length == 0) {
-					System.out.println("Antes de salir introduce al menos un dorsal.");
+					System.out.println("\tAntes de salir introduce al menos un dorsal.");
 				} else {
 					break;
 				}
-			}
+			} else {
+				// Verificar si el dorsal ya existe en la tabla
+				boolean existe = false;
+				for (int corredor : corredores) {
+					if (corredor == dorsal) {
+						existe = true;
+						break;
+					}
+				}
+				if (existe) {
+					System.out.println("\tEste dorsal ya lo has puesto antes. No puede haber repetidos.");
+				} else {
 
-			// Agrandar la tabla e ir añadiendo los números
-			corredores = Arrays.copyOf(corredores, corredores.length + 1);
-			corredores[corredores.length - 1] = dorsal;
+					// Si no está, agrandar la tabla e ir añadiendo los números
+					corredores = Arrays.copyOf(corredores, corredores.length + 1);
+					corredores[corredores.length - 1] = dorsal;
+					System.out.println("\tDorsales hasta el momento: " + Arrays.toString(corredores));
+				}
+			}
 		}
 
 		return corredores;
+	}
+
+	public static int busquedaTablaNoOrdenada(int[] tabla, int valorABuscar) {
+		int posicion = -1;
+		for (int i = 0; i < tabla.length; i++) {
+			if (valorABuscar == tabla[i]) {
+				posicion = i;
+				break;
+			}
+		}
+		return posicion;
 	}
 
 	public static int pedirNumeroEntero(String mensaje, int minimo) {
@@ -185,10 +203,10 @@ public class llegada_a_meta {
 				if (numero >= minimo) {
 					return numero;
 				} else {
-					System.out.println("Introduce un número mayor que " + minimo + ".");
+					System.out.println("\tIntroduce un número mayor que " + minimo + ".");
 				}
 			} else {
-				System.out.print("Introduce un número correcto. ");
+				System.out.print("\tIntroduce un número correcto. ");
 				sc.nextLine();
 			}
 		}
