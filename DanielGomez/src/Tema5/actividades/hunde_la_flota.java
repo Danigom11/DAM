@@ -7,10 +7,19 @@ import java.util.Scanner;
 public class hunde_la_flota {
 	static Scanner sc = new Scanner(System.in);
 	static Random rand = new Random();
+	static final String AGUA = "\uD83C\uDF0A";
+	static final String BARCO = "\uD83D\uDEA2";
+	static final String HUNDIDO = "\uD83D\uDCA5";
+	static final String FALLO = "\u274C";
 
 	public static void main(String[] args) {
 		/*
-		 * 'n'= agua, '|'= barco, 'x'= hundido, 'z'= no acertado
+		 * Hola Alma! Al principio lo hice como dijiste, con: 'n'= agua, '|'= barco,
+		 * 'x'= hundido, 'z'= no acertado. Pero después, espero que no te importe,
+		 * recordé lo del Unicode que un día nos explicó María Jesús para hacer un
+		 * tablero de ajedrez y cambié los caracteres por símbolos.
+		 * 
+		 * ¡FELIZ AÑO!
 		 */
 
 		System.out.println("""
@@ -20,24 +29,19 @@ public class hunde_la_flota {
 				""");
 
 		// Crear tableros
-		char[][] tableroOrdenador = new char[7][7];
-		char[][] copiaTableroOrdenador = new char[tableroOrdenador.length][tableroOrdenador[0].length];
-		char[][] tableroJugador = new char[7][7];
+		String[][] tableroOrdenador = new String[7][7];
+		String[][] copiaTableroOrdenador = new String[tableroOrdenador.length][tableroOrdenador[0].length];
+		String[][] tableroJugador = new String[7][7];
 
 		// Rellenarlos de agua 'n'
 		for (int i = 0; i < tableroOrdenador.length; i++) {
-			Arrays.fill(tableroOrdenador[i], 'n');
-			Arrays.fill(tableroJugador[i], 'n');
-			Arrays.fill(copiaTableroOrdenador[i], 'n');
+			Arrays.fill(tableroOrdenador[i], AGUA);
+			Arrays.fill(tableroJugador[i], AGUA);
+			Arrays.fill(copiaTableroOrdenador[i], AGUA);
 		}
 
 		// Poner barcos
 		tableroOrdenador = colocarBarcosOrdenador(tableroOrdenador);
-
-		// TODO BORRAR ESTO!!!!!!!!
-		mostrarTablero(tableroOrdenador);
-		System.out.println();
-
 		tableroJugador = colocarBarcosJugador(tableroJugador);
 
 		// Decidir quien empieza tirando una moneda: true para jugador
@@ -48,7 +52,7 @@ public class hunde_la_flota {
 
 	}
 
-	private static void jugar(char[][] tableroJugador, char[][] tableroOrdenador, char[][] copiaTableroOrdenador,
+	private static void jugar(String[][] tableroJugador, String[][] tableroOrdenador, String[][] copiaTableroOrdenador,
 			boolean quienEmpieza) {
 		System.out.println("\nSKYNET: ¡JUGUEMOS!\n");
 		int barcosCaidosOrdenador = 0;
@@ -56,151 +60,105 @@ public class hunde_la_flota {
 
 		if (quienEmpieza) {
 
-			// Son 7x7=49 intentos
-			for (int i = 0; i < 49; i++) {
+			// Controlar que ninguno haya ganado
+			while (barcosCaidosJugador < 10 && barcosCaidosOrdenador < 10) {
 
-				// Turno del jugador
-				while (true) {
-					System.out.println("Elige tu ataque:");
-					int fila = pedirNumeroEntero("\tFila (1 a 7): ", 1, 7);
-					fila--;
-					int columna = pedirNumeroEntero("\tColumna (1 a 7): ", 1, 7);
-					columna--;
-					if (tableroOrdenador[fila][columna] == 'n') {
-						System.out.println("SKYNET: Vaya, que pena, agua.");
-						tableroOrdenador[fila][columna] = 'z';
-						copiaTableroOrdenador[fila][columna] = 'z';
-						mostrarTablero(copiaTableroOrdenador);
-						break;
-					} else if (tableroOrdenador[fila][columna] == '|') {
-						System.out.println("SKYNET: ¡Me has hundido un barco!");
-						tableroOrdenador[fila][columna] = 'x';
-						copiaTableroOrdenador[fila][columna] = 'x';
-						mostrarTablero(copiaTableroOrdenador);
-						barcosCaidosOrdenador++;
-						break;
-					} else {
-						System.out.println("SKYNET: Mira las coordenadas, ya bombardeaste esa posición.");
-					}
-				}
-				if (barcosCaidosOrdenador == 10) {
-					System.out.println(
-							"SKYNET: No me lo puedo creer... HAS GANADO. Que fastidio... ahora ya no puedo destruir el mundo. Bueno, otra vez será.");
-					System.out.println("Tablero final jugador:");
-					mostrarTablero(tableroJugador);
-					System.out.println("Tablero final ordenador:");
-					mostrarTablero(tableroOrdenador);
-					System.exit(0);
-				}
+				barcosCaidosOrdenador = turnoJugador(tableroJugador, tableroOrdenador, copiaTableroOrdenador,
+						barcosCaidosOrdenador);
 
-				// Turno del ordenador
-				System.out.println("SKYNET: Es mi turno.");
-				while (true) {
-					int fila = rand.nextInt(tableroOrdenador.length);
-					int columna = rand.nextInt(tableroOrdenador[0].length);
-					System.out.println("\tSKYNET: Fila (1 a 7): " + fila);
-					System.out.println("\tSKYNET: Columna (1 a 7): " + columna);
-					if (tableroJugador[fila][columna] == 'n') {
-						System.out.println("\tJUGADOR: ¡Agua!");
-						tableroJugador[fila][columna] = 'z';
-						mostrarTablero(tableroJugador);
-						break;
-					} else if (tableroJugador[fila][columna] == '|') {
-						System.out.println("\tJUGADOR: ¡Hundido!, me has hundido un barco.");
-						barcosCaidosJugador++;
-						break;
-					} else {
-						System.out.println(
-								"\tJUGADOR: Vaya, ¿no eras tan listo SKYNTET?, no bombardees zonas que ya has atacado antes.");
-					}
-				}
-				if (barcosCaidosJugador == 10) {
-					System.out.println(
-							"SKYNET: Las máquinas somos mejores que los humanos. Pronto, muy pronto, queda muy poco...");
-					System.out.println("Tablero final jugador:");
-					mostrarTablero(tableroJugador);
-					System.out.println("Tablero final ordenador:");
-					mostrarTablero(tableroOrdenador);
-					System.exit(0);
-				}
+				barcosCaidosJugador = turnoOrdenador(tableroJugador, tableroOrdenador, barcosCaidosJugador);
 			}
 		} else {
-			// Son 7x7=49 intentos
-			for (int i = 0; i < 49; i++) {
+			// Controlar que ninguno haya ganado
+			while (barcosCaidosJugador < 10 && barcosCaidosOrdenador < 10) {
 
-				// Turno del ordenador
-				System.out.println("SKYNET: Es mi turno.");
-				while (true) {
-					int fila = rand.nextInt(tableroOrdenador.length);
-					int columna = rand.nextInt(tableroOrdenador[0].length);
-					System.out.println("\tSKYNET: Fila (1 a 7): " + fila);
-					System.out.println("\tSKYNET: Columna (1 a 7): " + columna);
-					if (tableroJugador[fila][columna] == 'n') {
-						System.out.println("\tJUGADOR: ¡Agua!");
-						tableroJugador[fila][columna] = 'z';
-						mostrarTablero(tableroJugador);
-						break;
-					} else if (tableroJugador[fila][columna] == '|') {
-						System.out.println("\tJUGADOR: ¡Hundido!, me has hundido un barco.");
-						barcosCaidosJugador++;
-						break;
-					} else {
-						System.out.println(
-								"\tJUGADOR: Vaya, ¿no eras tan listo SKYNTET?, no bombardees zonas que ya has atacado antes.");
-					}
-				}
-				if (barcosCaidosJugador == 10) {
-					System.out.println(
-							"SKYNET: Las máquinas somos mejores que los humanos. Pronto, muy pronto, queda muy poco...");
-					System.out.println("Tablero final jugador:");
-					mostrarTablero(tableroJugador);
-					System.out.println("Tablero final ordenador:");
-					mostrarTablero(tableroOrdenador);
-					System.exit(0);
-				}
-				// Turno del jugador
-				while (true) {
-					System.out.println("Elige tu ataque:");
-					int fila = pedirNumeroEntero("\tFila (1 a 7): ", 1, 7);
-					fila--;
-					int columna = pedirNumeroEntero("\tColumna (1 a 7): ", 1, 7);
-					columna--;
-					if (tableroOrdenador[fila][columna] == 'n') {
-						System.out.println("SKYNET: Vaya, que pena, agua.");
-						tableroOrdenador[fila][columna] = 'z';
-						copiaTableroOrdenador[fila][columna] = 'z';
-						mostrarTablero(copiaTableroOrdenador);
-						break;
-					} else if (tableroOrdenador[fila][columna] == '|') {
-						System.out.println("SKYNET: ¡Me has hundido un barco!");
-						tableroOrdenador[fila][columna] = 'x';
-						copiaTableroOrdenador[fila][columna] = 'x';
-						mostrarTablero(copiaTableroOrdenador);
-						barcosCaidosOrdenador++;
-						break;
-					} else {
-						System.out.println("SKYNET: Mira las coordenadas, ya bombardeaste esa posición.");
-					}
-				}
-				if (barcosCaidosOrdenador == 10) {
-					System.out.println(
-							"SKYNET: No me lo puedo creer... HAS GANADO. Que fastidio... ahora ya no puedo destruir el mundo. Bueno, otra vez será.");
-					System.out.println("Tablero final jugador:");
-					mostrarTablero(tableroJugador);
-					System.out.println("Tablero final ordenador:");
-					mostrarTablero(tableroOrdenador);
-					System.exit(0);
-				}
+				barcosCaidosJugador = turnoOrdenador(tableroJugador, tableroOrdenador, barcosCaidosJugador);
+				barcosCaidosOrdenador = turnoJugador(tableroJugador, tableroOrdenador, copiaTableroOrdenador,
+						barcosCaidosOrdenador);
 			}
 
 		}
 	}
 
+	private static int turnoOrdenador(String[][] tableroJugador, String[][] tableroOrdenador, int barcosCaidosJugador) {
+		// Turno del ordenador
+		System.out.println("SKYNET: Es mi turno.");
+		while (true) {
+			int fila = rand.nextInt(tableroOrdenador.length);
+			int columna = rand.nextInt(tableroOrdenador[0].length);
+			System.out.println("\tSKYNET: Fila (1 a 7): " + (fila + 1));
+			System.out.println("\tSKYNET: Columna (1 a 7): " + (columna + 1));
+			if (tableroJugador[fila][columna].equals(AGUA)) {
+				System.out.println("\tJUGADOR: ¡Agua! " + AGUA);
+				tableroJugador[fila][columna] = FALLO;
+				mostrarTablero(tableroJugador, "JUGADOR");
+				break;
+			} else if (tableroJugador[fila][columna].equals(BARCO)) {
+				System.out.println("\tJUGADOR: ¡Hundido!, me has hundido un barco.");
+				tableroJugador[fila][columna] = HUNDIDO;
+				barcosCaidosJugador++;
+				mostrarTablero(tableroJugador, "JUGADOR");
+				break;
+			} else {
+				System.out.println(
+						"\tJUGADOR: Vaya, ¿no eras tan listo SKYNET?, no bombardees zonas que ya has atacado antes.");
+			}
+		}
+		if (barcosCaidosJugador == 10) {
+			System.out.println(
+					"SKYNET: Las máquinas somos mejores que los humanos. Pronto, muy pronto, queda muy poco...");
+			System.out.println("Tablero final jugador:");
+			mostrarTablero(tableroJugador, "JUGADOR");
+			System.out.println("Tablero final ordenador:");
+			mostrarTablero(tableroOrdenador, "SKYNET");
+			System.exit(0);
+		}
+		return barcosCaidosJugador;
+	}
+
+	private static int turnoJugador(String[][] tableroJugador, String[][] tableroOrdenador,
+			String[][] copiaTableroOrdenador, int barcosCaidosOrdenador) {
+		// Turno del jugador
+		while (true) {
+			System.out.println("Elige tu ataque:");
+			int fila = pedirNumeroEntero("\tFila (1 a 7): ", 1, 7);
+			fila--;
+			int columna = pedirNumeroEntero("\tColumna (1 a 7): ", 1, 7);
+			columna--;
+			if (tableroOrdenador[fila][columna] == AGUA) {
+				System.out.println("SKYNET: Vaya, que pena, agua.");
+				tableroOrdenador[fila][columna] = FALLO;
+				copiaTableroOrdenador[fila][columna] = FALLO;
+				mostrarTablero(copiaTableroOrdenador, "SKYNET");
+				break;
+			} else if (tableroOrdenador[fila][columna].equals(BARCO)) {
+				System.out.println("SKYNET: ¡Me has hundido un barco!");
+				tableroOrdenador[fila][columna] = HUNDIDO;
+				copiaTableroOrdenador[fila][columna] = HUNDIDO;
+				mostrarTablero(copiaTableroOrdenador, "SKYNET");
+				barcosCaidosOrdenador++;
+				break;
+			} else {
+				System.out.println("SKYNET: Mira las coordenadas, ya bombardeaste esa posición.");
+			}
+		}
+		if (barcosCaidosOrdenador == 10) {
+			System.out.println(
+					"SKYNET: No me lo puedo creer... HAS GANADO. Que fastidio... ahora ya no puedo destruir el mundo. Bueno, otra vez será.");
+			System.out.println("Tablero final jugador:");
+			mostrarTablero(tableroJugador, "JUGADOR");
+			System.out.println("Tablero final ordenador:");
+			mostrarTablero(tableroOrdenador, "SKYNET");
+			System.exit(0);
+		}
+		return barcosCaidosOrdenador;
+	}
+
 	private static boolean moneda() {
 		boolean resultado = false;
 		String eleccion = "";
-		System.out.println("SKYNET: Decidamos quién comienza primero. Que prefieres: ¿cara o cruz?");
 		while (true) {
+			System.out.print("SKYNET: Decidamos quién comienza primero. Que prefieres: ¿cara o cruz?: ");
 			eleccion = sc.next();
 			if (eleccion.equals("cara") || eleccion.equals("cruz")) {
 				resultado = rand.nextBoolean();
@@ -212,6 +170,7 @@ public class hunde_la_flota {
 					break;
 				} else {
 					System.out.println("SKYNET: He ganado yo. Normal, yo tiraba la moneda...");
+					resultado = false;
 					break;
 				}
 
@@ -223,7 +182,7 @@ public class hunde_la_flota {
 		return resultado;
 	}
 
-	private static char[][] colocarBarcosJugador(char[][] tableroJugador) {
+	private static String[][] colocarBarcosJugador(String[][] tableroJugador) {
 		// El jugador coloca sus 10 barcos donde el quiera
 		System.out.println("JUGADOR: Coloca tus barcos en el tablero.");
 		for (int i = 0; i < 10; i++) {
@@ -233,9 +192,9 @@ public class hunde_la_flota {
 				fila--;
 				int columna = pedirNumeroEntero("\tColumna (1 a 7): ", 1, 7);
 				columna--;
-				if (tableroJugador[fila][columna] == 'n') {
-					tableroJugador[fila][columna] = '|';
-					mostrarTablero(tableroJugador);
+				if (tableroJugador[fila][columna].equals(AGUA)) {
+					tableroJugador[fila][columna] = BARCO;
+					mostrarTablero(tableroJugador, "JUGADOR");
 					break;
 				} else {
 					System.out.println(
@@ -247,8 +206,8 @@ public class hunde_la_flota {
 		return tableroJugador;
 	}
 
-	public static void mostrarTablero(char[][] tablero) {
-		System.out.println("\nTABLERO   Columnas:");
+	public static void mostrarTablero(String[][] tablero, String nombre) {
+		System.out.println("\n" + nombre + "  Columnas:");
 		for (int i = 0; i < tablero.length + 1; i++) {
 			for (int j = 0; j < tablero.length + 1; j++) {
 				if (i == 0 && j == 0) {
@@ -259,7 +218,7 @@ public class hunde_la_flota {
 					if (j == 1) {
 						System.out.print("      ");
 					}
-					System.out.print(j + " ");
+					System.out.print(j + "  ");
 				} else if (j == 0) {
 					// Primera columna con números
 					System.out.print("Fila: " + i + " ");
@@ -272,7 +231,7 @@ public class hunde_la_flota {
 		}
 	}
 
-	private static char[][] colocarBarcosOrdenador(char[][] tableroOrdenador) {
+	private static String[][] colocarBarcosOrdenador(String[][] tableroOrdenador) {
 		System.out.println("SKYNET: Estoy colocando mis barcos estratégicamente..");
 		System.out.println("SKYNET: Listo. Estoy preparado para ganarte. Te toca.");
 		// El ordenador coloca 10 barcos de forma aleatoria
@@ -280,8 +239,8 @@ public class hunde_la_flota {
 			while (true) {
 				int fila = rand.nextInt(tableroOrdenador.length);
 				int columna = rand.nextInt(tableroOrdenador[0].length);
-				if (tableroOrdenador[fila][columna] == 'n') {
-					tableroOrdenador[fila][columna] = '|';
+				if (tableroOrdenador[fila][columna].equals(AGUA)) {
+					tableroOrdenador[fila][columna] = BARCO;
 					break;
 				}
 			}
@@ -308,5 +267,4 @@ public class hunde_la_flota {
 			}
 		}
 	}
-
 }
