@@ -177,7 +177,6 @@ public class actividadGestionMemoria {
 	}
 
 	public static boolean pedirBooleano(String mensaje) {
-		Scanner sc = new Scanner(System.in);
 		boolean numero = false;
 
 		while (true) {

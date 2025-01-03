@@ -17,7 +17,7 @@ public class numero_de_la_suerte {
 				""");
 
 		int resultado = numeroSuerte();
-		System.out.println("Tu número de la suerte es: " + resultado);
+		System.out.println("Conseguido. Tu número de la suerte es: " + resultado);
 
 	}
 
@@ -28,6 +28,8 @@ public class numero_de_la_suerte {
 
 		// Objeto para el control de los aleatorios
 		Random rand = new Random();
+		System.out.println("La tabla comienza así: " + Arrays.toString(tabla));
+
 
 		// Controlar que la tabla no llegue al mínimo
 		while (tabla.length > 1) {
@@ -37,9 +39,13 @@ public class numero_de_la_suerte {
 			do {
 				indice2 = rand.nextInt(tabla.length);
 			} while (indice2 == indice1);
+			
+			// Mostrar la tabla inicial
 
 			// Calcular la media
 			int media = (tabla[indice1] + tabla[indice2]) / 2;
+			
+			System.out.println("\nSelecciono -> Posición " + indice1 + " con el número " +tabla[indice1] + " y posición " + indice2 + " con el número: " + tabla[indice2]);
 
 			// Eliminarlos de la tabla controlando que primero elimina el mayor y luego el
 			// menor
@@ -48,6 +54,10 @@ public class numero_de_la_suerte {
 
 			// Añadir el número a la nueva tabla
 			tabla = añadirNumeroATabla(tabla, media);
+			
+			// Mostrar como va la tabla
+			System.out.println("Media de los dos: " + media + ". Y lo añado.");
+			System.out.println("La tabla va así: " + Arrays.toString(tabla));
 		}
 
 		// Cuando finaliza solo queda la posición 0
