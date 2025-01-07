@@ -27,7 +27,6 @@ public class hunde_la_flota {
 				HUNDIR LA FLOTA (by SKYNET)
 				=======================================================
 				""");
-
 		// Crear tableros
 		String[][] tableroOrdenador = new String[7][7];
 		String[][] copiaTableroOrdenador = new String[tableroOrdenador.length][tableroOrdenador[0].length];

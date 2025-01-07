@@ -122,5 +122,4 @@ public class numero_de_la_suerte {
 			sc.nextLine();
 		}
 	}
-
 }
